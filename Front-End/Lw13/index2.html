@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Южный парк 2</title>
+
+</head>
+<body>
+
+  <canvas id="myCanvas" width="347" height="470"></canvas>
+  <script>
+    window.onload = () => {
+      const canvas = document.getElementById('myCanvas');
+      const ctx = canvas.getContext('2d');
+
+      //***КУРТКА***//
+      ctx.beginPath();
+      ctx.moveTo(57, 301);
+      ctx.bezierCurveTo(43, 315, 30, 345, 23, 378);
+      ctx.bezierCurveTo(53, 385, 60, 405, 58, 410);
+      ctx.bezierCurveTo(58, 420, 58, 420, 58, 420);
+      ctx.bezierCurveTo(58, 420, 72, 422, 72, 422);
+      ctx.bezierCurveTo(72, 422, 72, 460, 72, 460);
+      ctx.bezierCurveTo(72, 460, 273, 460, 273, 460);
+      ctx.bezierCurveTo(273, 460, 273, 428, 273, 428);
+      ctx.bezierCurveTo(273, 428, 285, 425, 285, 425);
+      ctx.bezierCurveTo(285, 425, 287, 420, 287, 420);
+      ctx.bezierCurveTo(287, 420, 315, 380, 315, 380);
+      ctx.bezierCurveTo(318, 350, 285, 302, 287, 302);
+      ctx.bezierCurveTo(287, 302, 57, 301, 57, 301);
+      ctx.fillStyle = '#f36200';
+      ctx.strokeStyle = '#e65700';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ЛЕВАЯ РУКА***//
+      ctx.beginPath();
+      ctx.arc(34, 400, 24, 0, 2*Math.PI);
+      ctx.fillStyle = '#82481d';
+      ctx.strokeStyle = '#82481d';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ПРАВАЯ РУКА***//
+      ctx.beginPath();
+      ctx.arc(304, 404, 25, 0, 2*Math.PI);
+      ctx.fillStyle = '#82481d';
+      ctx.strokeStyle = '#82481d';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ЛЕВЫЙ ПАЛЕЦ***//
+      ctx.beginPath();
+      ctx.arc(51, 392, 11, 0, 2*Math.PI);
+      ctx.fillStyle = '#82481d';
+      ctx.strokeStyle = '#553122';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.fill();
+
+      //***ПРАВЫЙ ПАЛЕЦ***//
+      ctx.beginPath();
+      ctx.arc(283, 393, 11, 0, 2*Math.PI);
+      ctx.fillStyle = '#82481d';
+      ctx.strokeStyle = '#553122';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      ctx.fill();
+
+      //***ГОЛОВА***//
+      ctx.beginPath();
+      ctx.arc(172, 175, 171, 0, 2*Math.PI);
+      ctx.strokeStyle = '#e55600';
+      ctx.lineWidth = 2;
+      ctx.fillStyle = '#f66d00';
+      ctx.stroke();
+      ctx.fill();
+
+      //***КАКОЙ-ТО КРУГ***//
+      ctx.beginPath();
+      ctx.ellipse(168, 187, 124, 110, 0, 0, 2*Math.PI);
+      ctx.strokeStyle = '#462516';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      //***ЛИЦО***//
+      ctx.beginPath();
+      ctx.ellipse(165, 174, 105, 93, 0, 0, 2*Math.PI);
+      ctx.strokeStyle = '#ffeec4';
+      ctx.fillStyle = '#ffeec4';
+      ctx.stroke();
+      ctx.fill();
+
+
+      //***ЛЕВЫЙ ГЛАЗ***//
+      ctx.beginPath();
+      ctx.ellipse(126, 166, 49, 42, -Math.PI/3, 2*Math.PI, 0, [true]);
+      ctx.strokeStyle = '#fdd5b1';
+      ctx.fillStyle = '#fdfdfd';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ЛЕВЫЙ ЗРАЧОК***//
+      ctx.beginPath();
+      ctx.ellipse(140, 167, 6, 6, -Math.PI/3, 2*Math.PI, 0, [true]);
+      ctx.strokeStyle = '#312d3c';
+      ctx.fillStyle = '#312d3c';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ПРАВЫЙ ГЛАЗ***//
+      ctx.beginPath();
+      ctx.ellipse(215, 175, 51, 43, -2*Math.PI/3, 2*Math.PI, 0, [true]);
+      ctx.strokeStyle = '#fdd5b1';
+      ctx.fillStyle = '#fdfdfd';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ПРАВЫЙ ЗРАЧОК***//
+      ctx.beginPath();
+      ctx.ellipse(201, 170, 6, 6, -Math.PI/3, 2*Math.PI, 0, [true]);
+      ctx.strokeStyle = '#312d3c';
+      ctx.fillStyle = '#312d3c';
+      ctx.stroke();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(173, 148);
+      ctx.bezierCurveTo(169, 148, 168, 167, 169, 170);
+      ctx.strokeStyle = '#402d28';
+      ctx.stroke();
+
+      //***ЛЕВЫЙ МЕХ***//
+      ctx.beginPath();
+      ctx.moveTo(174, 81);
+      ctx.bezierCurveTo(20, 64, 20, 277, 164, 267);
+      ctx.bezierCurveTo(70, 220, 70, 120, 174, 81);
+      ctx.strokeStyle = '#82461c';
+      ctx.fillStyle = '#82461c';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ПРАВЫЙ МЕХ***//
+      ctx.beginPath();
+      ctx.moveTo(174, 81);
+      ctx.bezierCurveTo(318, 90, 300, 297, 164, 267);
+      ctx.bezierCurveTo(270, 215, 250, 130, 174, 81);
+      ctx.strokeStyle = '#82461c';
+      ctx.fillStyle = '#82461c';
+      ctx.stroke();
+      ctx.fill();
+
+      //***ЛЕВЫЙ ШНУРОК***//
+      ctx.beginPath();
+      ctx.moveTo(164, 267);
+      ctx.bezierCurveTo(155, 277, 156, 301, 143, 321);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#402d28';
+      ctx.stroke();
+
+      //***ПРАВЫЙ ШНУРОК***//
+      ctx.beginPath();
+      ctx.moveTo(164, 267);
+      ctx.bezierCurveTo(173, 275, 162, 325, 173, 335);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#402d28';
+      ctx.stroke();
+
+      //***МОЛНИЯ***//
+      ctx.beginPath();
+      ctx.moveTo(173, 347);
+      ctx.lineTo(172, 433);
+      ctx.strokeStyle = '#000';
+      ctx.stroke();
+
+      //***ЛЕВАЯ СКЛАДКА***//
+      ctx.beginPath();
+      ctx.moveTo(66, 363);
+      ctx.lineTo(61, 387);
+      ctx.strokeStyle = '#000';
+      ctx.stroke();
+
+      //***ПРАВАЯ СКЛАДКА***//
+      ctx.beginPath();
+      ctx.moveTo(271, 364);
+      ctx.lineTo(274, 386);
+      ctx.strokeStyle = '#000';
+      ctx.stroke();
+
+      //***НОГИ***//
+      ctx.beginPath();
+      ctx.moveTo(64, 463);
+      ctx.lineTo(276, 463);
+      ctx.strokeStyle = '#000';
+      ctx.lineCap = "round";
+      ctx.lineWidth = 10;
+      ctx.stroke();
+
+      //***ДОП***//
+      ctx.beginPath();
+      ctx.moveTo(73, 424);
+      ctx.bezierCurveTo(95, 435, 213, 437, 273, 428);
+      ctx.strokeStyle = '#e65600';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
