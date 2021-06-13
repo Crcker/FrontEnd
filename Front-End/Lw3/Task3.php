@@ -64,7 +64,7 @@
     $password = getGETParameter('password');
 
     $passwordStrength = getPasswordStrength($password);
-    if (!is_null($passwordStrength))
+    if (!empty($passwordStrength))
     {
         echo $passwordStrength;
     }
