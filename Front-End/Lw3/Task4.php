@@ -1,81 +1,79 @@
 <?php
 
     const DIR = "./data/";
-
+    const TXT = '.txt';
+    const divider = ':';
+    
     function getGETParameter(string $key): ?string
     {
         return $_GET[$key] ?? null;
     }
 
-    function saveDataByEmail(array $user, string &$error = ''): bool
+    function SaveUserDataByEmail(array $userData , string &$error = ''): bool
     {
-        if (!empty($user['email']))
-        {
-            if (!is_dir(DIR))
-            {
-                mkdir(DIR);
-            }
-
-            $filePath = DIR . $user['email'] . '.txt';
-            if (is_readable($filePath))
-            {
-                $currentData = [];
-                if (!getDataFromFile($filePath, $currentData))
-                {
-                    $error = 'Error! Internal server error!';
-                    return false;
-                }
-
-                $newData = [];
-                foreach ($user as $key => $value)
-                {
-                    $newData[$key] = $value ?? $currentData[$key];
-                }
-
-                if (!setDataToFile($filePath, $newData))
-                {
-                    $error = 'Error! Internal server error!';
-                    return false;
-                }
-            }
-            else
-            {
-                if (!setDataToFile($filePath, $user))
-                {
-                    $error = 'Error! Internal server error!';
-                    return false;
-                }
-            }
-        }
-        else
+        if (empty($userData['email']))
         {
             $error = 'Error! Email required field!';
             return false;
         }
 
-        return true;
+        if (!is_dir(DIR))
+        {
+            mkdir(DIR);
+        }
+
+        $filePath = DIR . $userData['email'] . TXT;
+        if (is_readable($filePath))
+        {
+            $currentData = [];
+            if (!getDataFromFile($filePath, $currentData))
+            {
+                $error = 'Error! Internal server error!';
+                return false;
+            }
+
+            $newData = [];
+            foreach ($userData as $key => $value)
+            {
+                $newData[$key] = $value ?? $currentData[$key];
+            }
+
+            if (!WriteDataToFile($filePath, $newData))
+            {
+                $error = 'Error! Internal server error!';
+                return false;
+            }
+        }
+        elseif(!WriteDataToFile($filePath, $user))
+        {
+            
+            $error = 'Error! Internal server error!';
+            return false;
+        }
+    
+        return $error;
     }
 
-    function getDataFromFile(string $filePath, array &$data = []): bool
+    function getDataFromFile(string $filePath, array $data = []): bool
     {
         $fileDescriptor = fopen($filePath, 'r');
         if (!$fileDescriptor)
         {
-            return false;
+            return $filePath;
         }
 
-        while (($fileLine = fgets($fileDescriptor)) !== false)
+        while ($fileLine = fgets($fileDescriptor))
         {
-            $splitData = explode(':', $fileLine, 2);
+            $splitData = explode(divider, $fileLine, 2);
             $key = trim($splitData[0]);
             $value = trim($splitData[1]);
             $data[$key] = $value;
         }
 
-        return true;
+        return $filePath;
     }
 
-    function setDataToFile(string $filePath, array $data): bool
+    function WriteDataToFile(string $filePath, array $data): bool
     {
         $fileDescriptor = fopen($filePath, 'w');
         if (!$fileDescriptor)
@@ -85,7 +83,7 @@
 
         foreach ($data as $key => $userInfo)
         {
-            fwrite($fileDescriptor, $key . ': ' . $userInfo . PHP_EOL);
+            fwrite($fileDescriptor, $key . divider . $userInfo . PHP_EOL);
         }
         fclose($fileDescriptor);
 
@@ -95,7 +93,7 @@
     header('Content-Type: text/plane');
 
 
-    $user = [
+    $userData = [
         'firstName' => getGETParameter('first_name'),
         'lastName' => getGETParameter('last_name'),
         'email' => getGETParameter('email'),
@@ -103,7 +101,7 @@
     ];
     $error = 'ERR';
 
-    if (!saveDataByEmail($user, $error))
+    if (!SaveUserDataByEmail($userData, $error))
     {
         echo $error;
     }

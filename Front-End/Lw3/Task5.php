@@ -1,6 +1,8 @@
 <?php
 
     const DIR = "./data/";
+    const TXT = '.txt';
+    const divider = ':';
 
     function getGETParameter(string $key): ?string
     {
@@ -9,33 +11,28 @@
 
     function printDataFromFileByEmail(?string $email, string &$error): bool
     {
-        if ($email)
-        {
-            $filePath = DIR . $email . '.txt';
-            if (is_readable($filePath))
-            {
-                $data = [];
-                if (!getDataFromFile($filePath, $data))
-                {
-                    $error = 'Error! Internal server error!';
-                    return false;
-                }
-
-                printData($data);
-            }
-            else
-            {
-                $error = 'Error! Couldn\'t find a profile with this email address!';
-                return false;
-            }
-        }
-        else
+        if (!$email)
         {
             $error = 'Error! Email required field!';
             return false;
         }
+        $filePath = DIR . $email . TXT;
+        if (!is_readable($filePath))
+        {
+            $error = 'Error! Couldn\'t find a profile with this email address!';
+            return false;
+        }
+        
+        $data = [];
+        if (!getDataFromFile($filePath, $data))
+        {
+            $error = 'Error! Internal server error!';
+            return false;
+        }
 
-        return true;
+        printData($data);
+        
+        return $error;
     }
 
     function getDataFromFile(string $filePath, array &$data = []): bool
@@ -46,9 +43,9 @@
             return false;
         }
 
-        while (($fileLine = fgets($fileDescriptor)) !== false)
+        while ($fileLine = fgets($fileDescriptor))
         {
-            $splitData = explode(':', $fileLine, 2);
+            $splitData = explode(divider, $fileLine, 2);
             $key = trim($splitData[0]);
             $value = trim($splitData[1]);
             $data[$key] = $value;

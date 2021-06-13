@@ -4,7 +4,8 @@
     const DIGIT_WEIGHT = 4;
     const UPPERCASE_WEIGHT = 2;
     const LOWERCASE_WEIGHT = 2;
-
+    const MinVal = 2;
+ 
     function getGETParameter(string $key): ?string
     {
         return $_GET[$key] ?? null;
@@ -12,49 +13,51 @@
 
     function getPasswordStrength(?string $password): ?int
     {
-        if (is_null($password))
-        {
-            echo 'Нет идентификатора password!';
-            return null;
-        }
-
-        if (iconv_strlen ($password) === 0)
-        {
-            echo 'Пустой идентификатор "password"!';
-            return null;
-        }
-
         $strength = 0;
-        $strength = $strength + iconv_strlen ($password) * CHARACTER_WEIGHT;
+        $amount = $amount + iconv_strlen ($password);
+        $strength = $strength + $amount * CHARACTER_WEIGHT;
 
         $strength = $strength + (preg_match_all("/\d/", $password)) * DIGIT_WEIGHT;
 
         $uppercase = preg_match_all("/[A-ZА-Я]/u", $password);
-        if ($uppercase !== 0)
+        if ($uppercase)
         {
-            $strength = $strength + (iconv_strlen ($password) - $uppercase) * UPPERCASE_WEIGHT;
+            $strength = $strength + ($amount - $uppercase) * UPPERCASE_WEIGHT;
         }
 
         $lowercase = preg_match_all("/[a-zа-я]/u", $password);
-        if ($lowercase !== 0)
+        if ($lowercase)
         {
-            $strength = $strength + (iconv_strlen ($password) - $lowercase) * LOWERCASE_WEIGHT;
+            $strength = $strength + ($amount - $lowercase) * LOWERCASE_WEIGHT;
         }
 
-        $strength = ctype_alpha($password) ? ($strength - iconv_strlen ($password)) : $strength;
+        $strength = ctype_alpha($password) ? ($strength - $amount) : $strength;
 
-        $strength = ctype_digit($password) ? ($strength - iconv_strlen ($password)) : $strength;
+        $strength = ctype_digit($password) ? ($strength - $amount) : $strength;
 
-        foreach (count_chars($password, 1) as $val)
+        $strength = $strength - CountDuplicates($password);
+ 
+        
+
+        if ($strength == 0)
         {
-            if ($val >= 2)
-            {
-                $strength = $strength - $val;
-            }
+            return $strength;
         }
 
         return $strength;
-    }    
+    } 
+
+    function CountDuplicates(?string $password): ?int
+    {
+        foreach (count_chars($password, 1) as $val)
+        {
+            if ($val >= MinVal)
+            {
+                $duplicate = $val;
+            }
+        }
+        return $duplicate;
+    }
 
     header('Content-Type: text/plane');
 
@@ -65,3 +68,15 @@
     {
         echo $passwordStrength;
     }
+    
+    if (is_null($password))
+    {
+        echo getPasswordStrength($password) ?: 'Нет идентификатора password!';
+
+    }
+    elseif (iconv_strlen ($password) === 0)
+    {
+        echo getPasswordStrength($password) ?: 'Пустой идентификатор "password"!';
+
+    }
+    

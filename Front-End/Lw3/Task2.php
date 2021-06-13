@@ -27,18 +27,20 @@
             throw new Exception('Строка не является буквенно-цифровой');
         }
 
-        return true;
+        return $identifier;
     }
 
     header("Content-Type: text/plain");
 
     $identifier = getGETParameter('identifier');
-    try {
+    try 
+    {
         if (isIdentifier($identifier))
         {
             echo 'Yes';
         }
     }
-    catch (Exception $e) {
+    catch (Exception $e) 
+    {
         echo "No" . PHP_EOL . $e->getMessage();
     }
