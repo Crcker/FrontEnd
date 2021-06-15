@@ -4,20 +4,20 @@
     const DIGIT_WEIGHT = 4;
     const UPPERCASE_WEIGHT = 2;
     const LOWERCASE_WEIGHT = 2;
-    const MINVALUE = 2;
+    const MIN_VALUE = 2;
  
-    function GetGETParameter(string $key)
+    function getGETParameter(string $key)
     {
         return $_GET[$key];
     }
 
-    function GetPasswordStrength(?string $password)
+    function getPasswordStrength(?string $password)
     {
+        $strength = 0;
         if (empty($password))
         {
             return $strength;
         }
-        $strength = 0;
         $amount = $amount + iconv_strlen ($password);
         $strength = $strength + $amount * CHARACTER_WEIGHT;
 
@@ -44,7 +44,7 @@
         return $strength;
     } 
 
-    function GetCountDuplicates(?string $password)
+    function getCountDuplicates(?string $password)
     {
         foreach (count_chars($password, 1) as $val)
         {
@@ -58,6 +58,6 @@
 
     header('Content-Type: text/plane');
 
-    $password = GetGETParameter('password');
+    $password = getGETParameter('password');
 
-    echo ((iconv_strlen ($password) === 0) ? (is_null ($password) ? 'Нет идентификатора password!' : 'Пустой идентификатор "password"!') : GetPasswordStrength($password));    
+    echo ((iconv_strlen($password) === 0) ? 'Нет password!' : getPasswordStrength($password));    

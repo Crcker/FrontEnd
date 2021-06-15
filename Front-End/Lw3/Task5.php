@@ -4,12 +4,12 @@
     const TXT = '.txt';
     const DIVIDER = ':';
 
-    function GetGETParameter(string $key)
+    function getGETParameter(string $key)
     {
         return $_GET[$key] ?? null;
     }
 
-    function PrintDataFromFileByEmail(?string $email)
+    function printDataFromFileByEmail(?string $email)
     {
         if (!$email)
         {
@@ -24,7 +24,7 @@
         }
         
         $data = [];
-        if (!GetDataFromFile($filePath, $data))
+        if (!getDataFromFile($filePath, $data))
         {
             $error = 'Error! Internal server error!';
             exit ($error);
@@ -35,7 +35,7 @@
         return null;
     }
 
-    function GetDataFromFile(string $filePath, array &$data = [])
+    function getDataFromFile(string $filePath, array &$data = [])
     {
         $fileDescriptor = fopen($filePath, 'r');
         if (!$fileDescriptor)
@@ -65,10 +65,10 @@
     header('Content-Type: text/plane');
 
 
-    $email = GetGETParameter('email');
+    $email = getGETParameter('email');
     $error = '';
 
-    if (!PrintDataFromFileByEmail($email, $error))
+    if (!printDataFromFileByEmail($email, $error))
     {
         echo $error;
     }

@@ -4,12 +4,12 @@
     const TXT = '.txt';
     const DIVIDER = ':';
     
-    function GetGETParameter(string $key)
+    function getGETParameter(string $key)
     {
         return $_GET[$key] ?? null;
     }
 
-    function SaveUserDataByEmail(array $userData)
+    function saveUserDataByEmail(array $userData)
     {
         if (empty($userData['email']))
         {
@@ -26,7 +26,7 @@
         if (is_readable($filePath))
         {
             $currentData = [];
-            if (!GetDataFromFile($filePath, $currentData))
+            if (!getDataFromFile($filePath, $currentData))
             {
                 $error = 'Error! Internal server error!';
                 exit ($error);
@@ -38,13 +38,13 @@
                 $newData[$key] = $value ?? $currentData[$key];
             }
 
-            if (!WriteDataToFile($filePath, $newData))
+            if (!writeDataToFile($filePath, $newData))
             {
                 $error = 'Error! Internal server error!';
                 exit ($error);
             }
         }
-        elseif(!WriteDataToFile($filePath, $userData))
+        elseif(!writeDataToFile($filePath, $userData))
         {
             
             $error = 'Error! Internal server error!';
@@ -54,7 +54,7 @@
         return null;
     }
 
-    function GetDataFromFile(string $filePath, array $data = [])
+    function getDataFromFile(string $filePath, array $data = [])
     {
         $fileDescriptor = fopen($filePath, 'r');
         if (!$fileDescriptor)
@@ -73,7 +73,7 @@
         return $filePath;
     }
 
-    function WriteDataToFile(string $filePath, array $data)
+    function writeDataToFile(string $filePath, array $data)
     {
         $fileDescriptor = fopen($filePath, 'w');
         if (!$fileDescriptor)
@@ -94,10 +94,10 @@
 
 
     $userData = [
-        'firstName' => GetGETParameter('first_name'),
-        'lastName' => GetGETParameter('last_name'),
-        'email' => GetGETParameter('email'),
-        'age' => GetGETParameter('age'),
+        'firstName' => getGETParameter('first_name'),
+        'lastName' => getGETParameter('last_name'),
+        'email' => getGETParameter('email'),
+        'age' => getGETParameter('age'),
     ];
 
-    SaveUserDataByEmail($userData);
+    saveUserDataByEmail($userData);

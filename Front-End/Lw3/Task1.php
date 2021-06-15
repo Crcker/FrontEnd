@@ -1,6 +1,6 @@
 <?php
 
-    function GetGETParameter(string $key)
+    function getGETParameter(string $key)
     {
         return $_GET[$key] ?? null;
     }
@@ -8,7 +8,7 @@
     header("Content-Type: text/plain");
 
 
-    $text = GetGETParameter('text');
+    $text = getGETParameter('text');
     if ($text)
     {
         $text = trim($text);

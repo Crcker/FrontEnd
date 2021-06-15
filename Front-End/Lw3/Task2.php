@@ -1,11 +1,11 @@
 <?php
  
-    function GetGETParameter(string $key)
+    function getGETParameter(string $key)
     {
         return $_GET[$key] ?? null;
     }
 
-    function IsIdentifier(?string $identifier)
+    function isIdentifier(?string $identifier)
     {
         if (is_null($identifier))
         {
@@ -32,10 +32,10 @@
 
     header("Content-Type: text/plain");
 
-    $identifier = GetGETParameter('identifier');
+    $identifier = getGETParameter('identifier');
     try 
     {
-       IsIdentifier($identifier);
+       isIdentifier($identifier);
        echo "yes";
     }
     catch (Exception $e) 
