@@ -5,7 +5,7 @@
         return $_GET[$key] ?? null;
     }
 
-    function excepIdentifier(?string $identifier)
+    function validateIdentifier(?string $identifier)
     {
         if (is_null($identifier))
         {
@@ -35,7 +35,7 @@
     $identifier = getGETParameter('identifier');
     try 
     {
-        excepIdentifier($identifier);
+        validateIdentifier($identifier);
         echo "yes";
     }
     catch (Exception $e) 
