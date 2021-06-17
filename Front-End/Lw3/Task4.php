@@ -14,7 +14,8 @@
         if (empty($userData['email']))
         {
             $error = 'Error! Email required field!';
-            return $error;
+            echo($error);
+            return null;
         }
 
         if (!is_dir(DIR))
@@ -29,7 +30,8 @@
             if (!getDataFromFile($filePath, $currentData))
             {
                 $error = 'Error! Internal server error!';
-                return $error;
+                echo($error);
+                return null;
             }
 
             $newData = [];
@@ -41,14 +43,16 @@
             if (!writeDataToFile($filePath, $newData))
             {
                 $error = 'Error! Internal server error!';
-                return $error;
+                echo($error);
+                return null;
             }
         }
         elseif(!writeDataToFile($filePath, $userData))
         {
             
             $error = 'Error! Internal server error!';
-            return $error;
+            echo($error);
+            return null;
         }
     
         return null;
