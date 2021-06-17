@@ -9,13 +9,13 @@
         return $_GET[$key] ?? null;
     }
 
-    function saveUserDataByEmail(array $userData): ?string
+    function saveUserDataByEmail(array $userData): void
     {
         if (empty($userData['email']))
         {
             $error = 'Error! Email required field!';
             echo($error);
-            return null;
+            return;
         }
 
         if (!is_dir(DIR))
@@ -31,7 +31,7 @@
             {
                 $error = 'Error! Internal server error!';
                 echo($error);
-                return null;
+                return;
             }
 
             $newData = [];
@@ -44,7 +44,7 @@
             {
                 $error = 'Error! Internal server error!';
                 echo($error);
-                return null;
+                return;
             }
         }
         elseif(!writeDataToFile($filePath, $userData))
@@ -52,10 +52,10 @@
             
             $error = 'Error! Internal server error!';
             echo($error);
-            return null;
+            return;
         }
     
-        return null;
+        return;
     }
 
     function getDataFromFile(string $filePath): ?array
