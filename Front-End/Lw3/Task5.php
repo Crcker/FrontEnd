@@ -14,20 +14,23 @@
         if (!$email)
         {
             $error = 'Error! Email required field!';
-            return $error;
+            echo($error);
+            return null;
         }
         $filePath = DIR . $email . FILE_EXTENSION;
         if (!is_readable($filePath))
         {
             $error = 'Error! Couldn\'t find a profile with this email address!';
-            return $error;
+            echo($error);
+            return null;
         }
         
         $data = [];
         if (!getDataFromFile($filePath, $data))
         {
             $error = 'Error! Internal server error!';
-            return $error;
+            echo($error);
+            return null;
         }
 
         printData($data);
